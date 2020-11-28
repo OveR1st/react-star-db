@@ -17,14 +17,9 @@ export default class RandomPlanet extends Component {
     loading: true
   }
 
-  constructor(){
-    super();
-    console.log('constructor()');
+  componentDidMount() {
     this.updadePlanet()
     this.interval = setInterval(this.updadePlanet, 10000);
-  }
-
-  componentDidMount() {
     console.log('componentDidMount()');
   }
 
@@ -57,7 +52,7 @@ export default class RandomPlanet extends Component {
   }
 
   render(){
-    console.log('render()');
+    
     const { planet, loading, error } = this.state;
     
     const hasData = !(loading || error);
@@ -85,8 +80,6 @@ const PlanetView = ({planet}) => {
     <React.Fragment>
       <img className="planet-image"
           src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`} />
-
-
         <div>
           <h4>{name}</h4>
           <ul className="list-group list-group-flush">
