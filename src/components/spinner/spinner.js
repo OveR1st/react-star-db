@@ -1,5 +1,5 @@
 import React from 'react';
-import SwapiService from '../../services/swapi-services';
+
 
 import './spinner.css';
 
