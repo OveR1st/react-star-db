@@ -24,7 +24,8 @@ export default class RandomPlanet extends Component {
   }
 
   componentWillUnmount() {
-    console.log('componentWillUnmount()');
+   clearInterval(this.interval);
+   console.log('componentWillUnmount()');
   }
 
   onPlanetLoaded = (planet) => {
