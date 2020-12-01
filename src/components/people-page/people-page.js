@@ -1,76 +1,47 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+
+import ItemList from '../item-list/item-list';
+import ItemDetails from '../item-details/item-details';
 import SwapiService from '../../services/swapi-services';
-import ErrorIndicator from '../error-indicator';
-import ItemList from '../item-list';
-import PersonDetails from '../person-details';
+import Row from '../row';
+import ErrorBoundry from '../error-boundry';
 
-import './people-page';
-
-const Row = ({left, right}) => {
-  return(
-    <div className="row mb2">
-      <div className="col-md-6">
-        {left}
-      </div>
-      <div className="col-md-6">
-        {right}
-      </div>
-    </div>
-  );
-}
-
-class ErrorBoundry extends Component {
-  render(){
-    return this.props.children;
-  };
-}
+import './people-page.css';
 
 export default class PeoplePage extends Component {
 
   swapiService = new SwapiService();
 
-  state={
-    selectedPerson: 3,
-    hasError: false
-  }
+  state = {
+    selectedPerson: 3
+  };
 
-  componentDidCatch(error, info) {
-    this.setState({ hasError: true });
-  }
+  onPersonSelected = (selectedPerson) => {
+    this.setState({ selectedPerson });
+  };
 
-
-  onPersonSelected = (id) => {
-    this.setState({
-      selectedPerson: id
-    })
-  }
-
-  render(){
+  render() {
 
     const itemList = (
-      <ItemList 
+      <ItemList
         onItemSelected={this.onPersonSelected}
         getData={this.swapiService.getAllPeople}>
+
         {(i) => (
           `${i.name} (${i.birthYear})`
         )}
+
       </ItemList>
     );
 
     const personDetails = (
-      <PersonDetails personId={this.state.selectedPerson}/>
+      <ErrorBoundry>
+        <ItemDetails personId={this.state.selectedPerson} />
+      </ErrorBoundry>
     );
 
-    if ( this.state.hasError) {
-      return <ErrorIndicator />
-    }
-
-    return(
-      <ErrorBoundry>
-        <Row left={itemList}
-           right={personDetails} />
-      </ErrorBoundry>
-      
+    return (
+      <Row left={itemList} right={personDetails} />
     );
   }
 }

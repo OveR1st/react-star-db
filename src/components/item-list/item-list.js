@@ -1,14 +1,14 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
-import Spinner from '../spinner';
+import Spinner from "../spinner";
 
 import './item-list.css';
 
 export default class ItemList extends Component {
-  
+
   state = {
     itemList: null
-  }
+  };
 
   componentDidMount() {
 
@@ -18,24 +18,24 @@ export default class ItemList extends Component {
       .then((itemList) => {
         this.setState({
           itemList
-        })
-      })
+        });
+      });
   }
 
-  renderItems(arr){
-    return arr.map( (item) => {
-    const { id } = item;
+  renderItems(arr) {
+    return arr.map((item) => {
+      const { id } = item;
+     
+      const label = this.props.children(item);
 
-    const label = this.props.children(item) // обращение к телу где мы передали функцию в компонент
-       return (
-        <li 
-          key={id}
-          className="list-group-item"
-          onClick={ () => this.props.onItemSelected(id) } >
+      return (
+        <li className="list-group-item"
+            key={id}
+            onClick={() => this.props.onItemSelected(id)}>
           {label}
         </li>
       );
-    })
+    });
   }
 
   render() {
@@ -45,10 +45,10 @@ export default class ItemList extends Component {
     if (!itemList) {
       return <Spinner />;
     }
-  
+
     const items = this.renderItems(itemList);
 
-    return(
+    return (
       <ul className="item-list list-group">
         {items}
       </ul>

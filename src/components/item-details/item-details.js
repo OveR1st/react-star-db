@@ -7,45 +7,46 @@ import ErrorIndicator from '../error-indicator';
 
 import ErrorButton from '../error-button';
 
-import './person-details.css';
+import './item-details.css';
 
 
 
-export default class PersonDetails extends Component {
+export default class ItemDetails extends Component {
 
   swapiService = new SwapiService();
 
   state = {
-    person: null,
+    item: null,
     loading: true,
-    error: false
+    error: false,
+    image: null
   }
 
   componentDidMount(){
-    this.updatePerson();
+    this.updateItem();
   }
 
   componentDidUpdate(prevProps){
-    if (this.props.personId !== prevProps.personId) {
+    if (this.props.itemId !== prevProps.itemId) {
       this.setState({
         loading: true
       });
-      this.updatePerson();
+      this.updateItem();
     }
   }
 
-  updatePerson(){
-    const { personId } = this.props;
-    if (!personId) {
+  updateItem(){
+    const { itemId, getData, getImageUrl } = this.props;
+    if (!itemId) {
       return;
     }
 
-    this.swapiService
-      .getPerson(personId)
-      .then( (person) => {
+    getData(itemId)
+      .then( (item) => {
         this.setState({
-          person,
-          loading: false
+          item,
+          loading: false,
+          image: getImageUrl(item)
         })
       })
       .catch(this.onError);
@@ -60,22 +61,22 @@ export default class PersonDetails extends Component {
 
   render(){
 
-    const { person, loading, error } = this.state;
+    const { item, loading, error, image } = this.state;
     
     const hasData = !(loading || error);
 
     const errorMessage = error ? <ErrorIndicator /> : null;
     const spinner = loading ? <Spinner /> : null;
-    const content = hasData ? <PersonView person={person}/> : null;
+    const content = hasData ? <ItemView item={item} image={image}/> : null;
     const errorbutton = <ErrorButton />
 
-    if(!person) {
-      return <span>Select a personfrom a list</span>
+    if(!item) {
+      return <span>Select a item from a list</span>
     }
 
 
     return(
-      <div className="person-details card">
+      <div className="item-details card">
         {errorMessage}
         {spinner}
         {content}
@@ -86,14 +87,15 @@ export default class PersonDetails extends Component {
   }
 };
 
-const PersonView = ({person}) => {
+const ItemView = ({item, image}) => {
 
-  const { id, name, height, gender, birthYear, eyeColor } = person
+  const { id, name, height, gender, birthYear, eyeColor } = item
+  const images = image
 
   return(
     <React.Fragment>
-      <img className="person-image"
-          src={`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`}/>
+      <img className="item-image"
+          src={images}/>
 
 
         <div className="card-body">
