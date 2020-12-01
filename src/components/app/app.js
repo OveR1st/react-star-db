@@ -1,17 +1,19 @@
 import React, {Component} from 'react';
 
-import Header from '../header';
-import RandomPlanet from '../random-planet';
-import ItemList from '../item-list';
-import PersonDetails from '../person-details';
-
-import PeoplePage from '../people-page/';
-import ErrorButton from '../error-button';
-
 import ErrorIndicator from '../error-indicator';
 import SwapiService from '../../services/swapi-services';
 
+import Header from '../header';
+import RandomPlanet from '../random-planet';
+import ErrorButton from '../error-button';
+
+import PeoplePage from '../people-page/';
+
+import ItemList from '../item-list';
+import PersonDetails from '../person-details';
+
 import './app.css';
+
 export default class App extends Component {
 
   swapiService = new SwapiService();
@@ -20,10 +22,7 @@ export default class App extends Component {
     hasError: false
   }
   
-
-
   componentDidCatch() {
-    console.log('componentDidCatch()')
     this.setState({ hasError: true });
   }
   

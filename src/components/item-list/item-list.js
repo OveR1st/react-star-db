@@ -1,15 +1,11 @@
 import React, {Component} from 'react';
-// import SwapiService from '../../services/swapi-services';
+
 import Spinner from '../spinner';
 
 import './item-list.css';
 
 export default class ItemList extends Component {
   
-  
-
-
-
   state = {
     itemList: null
   }
@@ -25,7 +21,6 @@ export default class ItemList extends Component {
         })
       })
   }
-
 
   renderItems(arr){
     return arr.map( (item) => {
@@ -43,11 +38,9 @@ export default class ItemList extends Component {
     })
   }
 
-
   render() {
 
     const { itemList } = this.state;
-    
 
     if (!itemList) {
       return <Spinner />;
@@ -56,12 +49,9 @@ export default class ItemList extends Component {
     const items = this.renderItems(itemList);
 
     return(
-
-
       <ul className="item-list list-group">
         {items}
       </ul>
     );
   }
 }
-
