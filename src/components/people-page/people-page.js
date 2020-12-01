@@ -19,6 +19,12 @@ const Row = ({left, right}) => {
   );
 }
 
+class ErrorBoundry extends Component {
+  render(){
+    return this.props.children;
+  };
+}
+
 export default class PeoplePage extends Component {
 
   swapiService = new SwapiService();
@@ -43,9 +49,12 @@ export default class PeoplePage extends Component {
 
     const itemList = (
       <ItemList 
-            onItemSelected={this.onPersonSelected}
-            getData={this.swapiService.getAllPeople}
-            renderItem={({name, gender, birthYear}) => `${name} (${gender}, ${birthYear})`} />
+        onItemSelected={this.onPersonSelected}
+        getData={this.swapiService.getAllPeople}>
+        {(i) => (
+          `${i.name} (${i.birthYear})`
+        )}
+      </ItemList>
     );
 
     const personDetails = (
@@ -57,8 +66,11 @@ export default class PeoplePage extends Component {
     }
 
     return(
-      <Row left={itemList}
+      <ErrorBoundry>
+        <Row left={itemList}
            right={personDetails} />
+      </ErrorBoundry>
+      
     );
   }
 }
