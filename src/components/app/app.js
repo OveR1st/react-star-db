@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import Header from '../header';
 import RandomPlanet from '../random-planet';
 import ItemList from '../item-list';
+
 import ItemDetails, { Record } from '../item-details/item-details';
 
 import Row from '../row';
@@ -34,11 +35,11 @@ export default class App extends Component {
       return <ErrorIndicator />
     }
 
-    const {getPerson, getStarship, getPersonImage, getStarshipImage} = this.swapiService
+    const {getPerson, getStarship, getPersonImage, getStarshipImage, getAllPeople, getAllPlanets} = this.swapiService
 
     const personDetails = (
       <ItemDetails 
-        itemId={11}
+        itemId={15}
         getData={getPerson}
         getImageUrl={getPersonImage}>
 
@@ -54,6 +55,10 @@ export default class App extends Component {
         getData={getStarship}
         getImageUrl={getStarshipImage}>
 
+        <Record field="model" label="Model"/>
+        <Record field="length" label="Length"/>
+        <Record field="costInCredits" label="Cost"/>
+
         
 
       </ItemDetails> 
@@ -62,11 +67,23 @@ export default class App extends Component {
     return (
       <div>
         <Header />
-        <Row 
+        
+        <ItemList
+            getData={getAllPeople}
+            onItemSelected={() => {}}>
+
+            { ({name}) => <span>{name}</span> }
+          </ItemList>
+
+          <ItemList
+            getData={getAllPlanets}
+            onItemSelected={() => {}}>
+
+            { ({name}) => <span>{name}</span> }
+          </ItemList>
+          <Row 
           left={personDetails}
           right={starshipDetails} />
-
-        
         {/* <RandomPlanet /> */}
         {/* <ErrorButton /> */}
   

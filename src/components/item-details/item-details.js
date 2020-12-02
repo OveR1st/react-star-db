@@ -9,11 +9,12 @@ import ErrorButton from '../error-button';
 
 import './item-details.css';
 
-const Record = ({field, label}) => {
+const Record = ({ item, field, label}) => {
+  console.log(item);
   return(
     <li className="list-group-item">
       <span className="term">{label}</span>
-      <span>{field}</span>
+      <span>{item[field]}</span>
     </li>
   );
 }
@@ -116,8 +117,8 @@ const ItemView = ({item, image, props}) => {
           <ul className="list-group list-group-flush">
             { 
               
-              React.Children.map(propsItemDetails, (child,idx) => {
-                return <li>{idx}</li>;
+              React.Children.map(propsItemDetails, (child) => {
+                return React.cloneElement(child, { item });
               })
 
             }
