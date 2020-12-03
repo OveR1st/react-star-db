@@ -3,6 +3,7 @@ import React from 'react';
 import ItemDetails, { Record } from '../item-details/item-details';
 import SwapiService from '../../services/swapi-services';
 import { PlanetList } from './item-lists';
+import whithDataDetails from '../hoc-helper'
 
 
 const swapiService = new SwapiService();
@@ -17,50 +18,54 @@ const {
 } = swapiService;
 
 
+const PersonDetails = whithDataDetails(ItemDetails, getPerson, getPersonImage );
+const PlanetDetails = whithDataDetails(ItemDetails, getPlanet, getPlanetImage );
+const StarshipDetails = whithDataDetails(ItemDetails, getStarship, getStarshipImage );
 
 
-const PersonDetails = ({ itemId })=> {
-  return (
-  <ItemDetails 
-    itemId={itemId}
-    getData={getPerson}
-    getImageUrl={getPersonImage}>
 
-    <Record field="gender" label="Gender"/>
-    <Record field="eyeColor" label="Eye Color"/>
+// const PersonDetails = ({ itemId })=> {
+//   return (
+//   <ItemDetails 
+//     itemId={itemId}
+//     getData={getPerson}
+//     getImageUrl={getPersonImage}>
 
-  </ItemDetails>
-  );
-};
+//     <Record field="gender" label="Gender"/>
+//     <Record field="eyeColor" label="Eye Color"/>
 
-const PlanetDetails = ({ itemId })=> {
-  return(
-    <ItemDetails
-      itemId={itemId}
-      getData={getPlanet}
-      getImageUrl={getPlanetImage}>
+//   </ItemDetails>
+//   );
+// };
+
+// const PlanetDetails = ({ itemId })=> {
+//   return(
+//     <ItemDetails
+//       itemId={itemId}
+//       getData={getPlanet}
+//       getImageUrl={getPlanetImage}>
     
-        <Record field="name" label="Name"/>
-        <Record field="population" label="Population"/>
-        <Record field="diameter" label="Diameter"/>
+//         <Record field="name" label="Name"/>
+//         <Record field="population" label="Population"/>
+//         <Record field="diameter" label="Diameter"/>
 
-    </ItemDetails>
-  );
-};
-const StarshipDetails = ({ itemId })=> {
-  return(
-    <ItemDetails 
-        itemId={ itemId }
-        getData={getStarship}
-        getImageUrl={getStarshipImage}>
+//     </ItemDetails>
+//   );
+// };
+// const StarshipDetails = ({ itemId })=> {
+//   return(
+//     <ItemDetails 
+//         itemId={ itemId }
+//         getData={getStarship}
+//         getImageUrl={getStarshipImage}>
 
-        <Record field="model" label="Model"/>
-        <Record field="length" label="Length"/>
-        <Record field="costInCredits" label="Cost"/>
+//         <Record field="model" label="Model"/>
+//         <Record field="length" label="Length"/>
+//         <Record field="costInCredits" label="Cost"/>
 
-      </ItemDetails>
-  );
-};
+//       </ItemDetails>
+//   );
+// };
 
 
 export {
