@@ -15,6 +15,12 @@ import ErrorIndicator from '../error-indicator';
 import SwapiService from '../../services/swapi-services';
 
 import './app.css';
+import {  PersonDetails,
+          PlanetDetails,
+          StarshipDetails,
+          PersonList,
+          PlanetList,
+          StarshipList } from '../sw-components/';
 export default class App extends Component {
 
   swapiService = new SwapiService();
@@ -67,20 +73,27 @@ export default class App extends Component {
     return (
       <div>
         <Header />
+
+        <PersonDetails itemId={11}/>
+        <PlanetDetails itemId={5}/>
+        <StarshipDetails itemId={9}/>
         
-        <ItemList
-            getData={getAllPeople}
+        <PersonList
             onItemSelected={() => {}}>
 
             { ({name}) => <span>{name}</span> }
-          </ItemList>
+          </PersonList>
 
-          <ItemList
-            getData={getAllPlanets}
+          <PlanetList
             onItemSelected={() => {}}>
 
             { ({name}) => <span>{name}</span> }
-          </ItemList>
+          </PlanetList>
+          <StarshipList
+            onItemSelected={() => {}}>
+
+            { ({name}) => <span>{name}</span> }
+          </StarshipList>
           <Row 
           left={personDetails}
           right={starshipDetails} />
