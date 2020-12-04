@@ -63,22 +63,22 @@ export default class App extends Component {
   // );
 
 
-  const personList = (
-    <PersonList
-        onItemSelected={() => {}} >
+  // const personList = (
+  //   <PersonList
+  //       onItemSelected={() => {}} >
 
-        { ({name}) => <span>{name}</span> }
-    </PersonList>
-  );
+  //       { ({name}) => <span>{name}</span> }
+  //   </PersonList>
+  // );
 
-  const personDetails = (
-    <PersonDetails
-      itemId={11}>
+  // const personDetails = (
+  //   <PersonDetails
+  //     itemId={11}>
 
-      <Record field="gender" label="Gender"/>
-      <Record field="eyeColor" label="Eye Color"/>
-    </PersonDetails>
-  );
+  //     <Record field="gender" label="Gender"/>
+  //     <Record field="eyeColor" label="Eye Color"/>
+  //   </PersonDetails>
+  // );
 
     if (this.state.hasError) {
       return <ErrorIndicator />
@@ -88,68 +88,11 @@ export default class App extends Component {
     <div>
       <Header />
       <RandomPlanet />
-      {/* <PersonDetails itemId={11}/>
-      <PlanetDetails itemId={5}/>
-      <StarshipDetails itemId={9}/> */}
-      
-      {/* <PersonList
-        onItemSelected={() => {}}>
 
-        { ({name}) => <span>{name}</span> }
-      </PersonList> */}
+      <PersonList />
+      <StarshipList />
+      <PersonDetails itemId={6}/>
 
-      {/* <PlanetList
-        onItemSelected={() => {}}>
-
-        { ({name}) => <span>{name}</span> }
-      </PlanetList> */}
-      {/* <StarshipList
-        onItemSelected={() => {}}>
-
-        { ({name}) => <span>{name}</span> }
-      </StarshipList> */}
-      <Row 
-      left={personList}
-      right={personDetails} />
-      {/* <RandomPlanet /> */}
-      {/* <ErrorButton /> */}
-
-      {/* <PeoplePage /> */}
-
-      {/* <div className="row mb2">
-        <div className="col-md-6">
-          <ItemList 
-            onItemSelected={this.onPersonSelected}
-            getData={this.swapiService.getAllPlanets}>
-
-              {(i) => (
-                `${i.name}, (${i.population}, ${i.diameter})`
-              )}
-
-          </ItemList>   
-        </div>
-        <div className="col-md-6">
-          <ItemDetails personId={this.state.selectedPerson}/>
-        </div>
-      </div> */}
-
-      {/* <div className="row mb2">
-        <div className="col-md-6">
-          <ItemList 
-            onItemSelected={this.onPersonSelected}
-            getData={this.swapiService.getAllStarships}>
-              
-              {(i) => (
-                `${i.name}, (${i.model}, ${i.length})`
-              )}
-
-          </ItemList>
-            
-        </div>
-        <div className="col-md-6">
-          <Details personId={this.state.selectedPerson}/>
-        </div>
-      </div> */}
     </div>
   );
   };
