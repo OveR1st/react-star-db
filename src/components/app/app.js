@@ -29,7 +29,7 @@ import {  PersonDetails,
 
 export default class App extends Component {
 
-  swapiService = new DummySwapiService();
+  swapiService = new SwapiService();
   
   state = {
     hasError: false
@@ -53,7 +53,9 @@ export default class App extends Component {
 
         <PersonList />
         <StarshipList />
-        <PersonDetails itemId={6}/>
+        <PersonDetails itemId={2}/>
+        <StarshipDetails itemId={3}/>
+        <PlanetDetails itemId={5}/>
       </SwapiServiceProvider>
     </div>
   );
