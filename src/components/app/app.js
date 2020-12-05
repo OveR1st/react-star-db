@@ -13,8 +13,12 @@ import Row from '../row';
 
 import ErrorIndicator from '../error-indicator';
 import SwapiService from '../../services/swapi-services';
+import DummySwapiService from '../../services/dummy-swapi-service';
+
 
 import './app.css';
+
+import { SwapiServiceProvider } from '../swapi-service-context/';
 
 import {  PersonDetails,
           PlanetDetails,
@@ -25,7 +29,7 @@ import {  PersonDetails,
 
 export default class App extends Component {
 
-  swapiService = new SwapiService();
+  swapiService = new DummySwapiService();
   
   state = {
     hasError: false
@@ -37,62 +41,20 @@ export default class App extends Component {
   
   render(){
 
-  // const personDetails = (
-  // <ItemDetails 
-  //   itemId={15}
-  //   getData={getPerson}
-  //   getImageUrl={getPersonImage}>
-
-  //   <Record field="gender" label="Gender"/>
-  //   <Record field="eyeColor" label="Eye Color"/>
-
-  // </ItemDetails>
-  // );
-
-  // const starshipDetails = (
-  // <ItemDetails 
-  //   itemId={5}
-  //   getData={getStarship}
-  //   getImageUrl={getStarshipImage}>
-
-  //   <Record field="model" label="Model"/>
-  //   <Record field="length" label="Length"/>
-  //   <Record field="costInCredits" label="Cost"/>
-
-  // </ItemDetails> 
-  // );
-
-
-  // const personList = (
-  //   <PersonList
-  //       onItemSelected={() => {}} >
-
-  //       { ({name}) => <span>{name}</span> }
-  //   </PersonList>
-  // );
-
-  // const personDetails = (
-  //   <PersonDetails
-  //     itemId={11}>
-
-  //     <Record field="gender" label="Gender"/>
-  //     <Record field="eyeColor" label="Eye Color"/>
-  //   </PersonDetails>
-  // );
-
     if (this.state.hasError) {
       return <ErrorIndicator />
     }
 
   return (
     <div>
-      <Header />
-      <RandomPlanet />
+      <SwapiServiceProvider value={this.swapiService} >
+        <Header />
+        <RandomPlanet />
 
-      <PersonList />
-      <StarshipList />
-      <PersonDetails itemId={6}/>
-
+        <PersonList />
+        <StarshipList />
+        <PersonDetails itemId={6}/>
+      </SwapiServiceProvider>
     </div>
   );
   };
