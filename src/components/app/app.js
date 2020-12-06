@@ -2,14 +2,7 @@ import React, {Component} from 'react';
 
 import Header from '../header';
 import RandomPlanet from '../random-planet';
-// import ItemList from '../item-list';
 
-import ItemDetails, { Record } from '../item-details/item-details';
-
-import Row from '../row';
-
-// import PeoplePage from '../people-page/';
-// import ErrorButton from '../error-button';
 
 import ErrorIndicator from '../error-indicator';
 import SwapiService from '../../services/swapi-services';
@@ -29,10 +22,23 @@ import {  PersonDetails,
 
 export default class App extends Component {
 
-  swapiService = new SwapiService();
+  
   
   state = {
-    hasError: false
+    hasError: false,
+    swapiService: new DummySwapiService()
+  }
+
+  onServiceChange = () => {
+    this.setState( ({ swapiService }) => {
+      const Service = swapiService instanceof SwapiService ? DummySwapiService : SwapiService;
+
+      console.log('switched to', Service.name);
+
+      return {
+        swapiService: new Service
+      }
+    })
   }
   
   componentDidCatch() {
@@ -47,8 +53,8 @@ export default class App extends Component {
 
   return (
     <div>
-      <SwapiServiceProvider value={this.swapiService} >
-        <Header />
+      <SwapiServiceProvider value={this.state.swapiService} >
+        <Header onServiceChange={ this.onServiceChange} />
         <RandomPlanet />
 
         <PersonList />
