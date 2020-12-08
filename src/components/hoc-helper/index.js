@@ -6,6 +6,6 @@ import compose from './compose';
 export {
     withData,
     withSwapiService,
-    withChildFunction
+    withChildFunction,
     compose
 };
