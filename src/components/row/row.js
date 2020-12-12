@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
 import './row.css';
 
@@ -16,9 +16,9 @@ const Row = ({ left, right }) => {
   );
 };
 
-Row.PropTypes = {
-  left: PropTypes.node,
-  right: PropTypes.node
-}
+// Row.PropTypes = {
+//   left: PropTypes.node,
+//   right: PropTypes.node
+// }
 
 export default Row;
