@@ -13,7 +13,4 @@ const HookSwitcher = () => {
       <button onClick={setLight}></button>
     </div>
   );
-
-
-
 }

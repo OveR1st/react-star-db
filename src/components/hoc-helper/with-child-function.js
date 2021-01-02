@@ -1,6 +1,5 @@
 import React from 'react'
 
-
 const withChildFunction = (fn) => (Wrapped) => {
   return (props) => {
     return (

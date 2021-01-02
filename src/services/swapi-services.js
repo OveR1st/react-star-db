@@ -96,6 +96,4 @@ export default class SwapiService {
       eyeColor: person.eye_color
     }
   }
-
-
 }

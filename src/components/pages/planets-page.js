@@ -11,7 +11,6 @@ export default class PlanetPage extends Component {
   }
 
   onItemSelected = (selectedItem) => {
-    console.log(selectedItem);
     this.setState({ selectedItem });
   }
 

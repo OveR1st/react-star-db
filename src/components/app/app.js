@@ -3,26 +3,30 @@ import React, {Component} from 'react';
 import Header from '../header';
 import RandomPlanet from '../random-planet';
 
-
-
 import ErrorIndicator from '../error-indicator';
 import SwapiService from '../../services/swapi-services';
 import DummySwapiService from '../../services/dummy-swapi-service';
 
-
 import './app.css';
 
 import { SwapiServiceProvider } from '../swapi-service-context/';
-import { PeoplePage, PlanetPage, StarshipsPage, LoginPage, SecretPage } from '../pages/';
+import {
+  PeoplePage,
+  PlanetPage,
+  StarshipsPage,
+  LoginPage,
+  SecretPage } from '../pages/';
 
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import { 
+  BrowserRouter as Router,
+  Route,
+  Switch } from 'react-router-dom';
+
 import { StarshipDetails } from '../sw-components';
 
 
 export default class App extends Component {
 
-  
-  
   state = {
     hasError: false,
     swapiService: new SwapiService(),
@@ -30,16 +34,12 @@ export default class App extends Component {
   }
 
   onLogin = () => {
-    console.log("click")
     this.setState({ isLoggedIn: true });
   }
 
   onServiceChange = () => {
     this.setState( ({ swapiService }) => {
       const Service = swapiService instanceof SwapiService ? DummySwapiService : SwapiService;
-
-      console.log('switched to', Service.name);
-
       return {
         swapiService: new Service()
       }
@@ -74,10 +74,8 @@ export default class App extends Component {
 
             <Route path="/starships" exact component={StarshipsPage} />
             <Route path="/starships/:id" render={({match}) => {
-            
               const { id } = match.params;
-              console.log(match);
-              return <StarshipDetails  itemId={id}/>
+              return <StarshipDetails itemId={id}/>
             }} />
 
             <Route 
